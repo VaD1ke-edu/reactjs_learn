@@ -113,6 +113,7 @@ class Developer extends Employee {
      */
     setManager(manager) {
         this._manager = manager;
+        this._manager.addDeveloper(this);
         return this;
     }
 
@@ -162,9 +163,14 @@ class Manager extends Employee {
 
     /**
      * @param {Developer} developer
+     * @param {boolean}   assignSelf
+     *
+     * @return {this}
      */
-    addDeveloper(developer) {
-        this._assignSelfToDevelopers([developer]);
+    addDeveloper(developer, assignSelf = false) {
+        if (assignSelf) {
+            this._assignSelfToDevelopers([developer]);
+        }
         this._developers.push(developer);
         return this;
     }

@@ -33,8 +33,8 @@ function calculateArea(...sides) {
 
     const calculator = calculatorMap[sides.length];
     return calculator ?
-        {square: round(calculator.getSquare(sides)), figure: calculator.getFigure(sides)} :
-        {square: undefined, figure: 'Undefined figure'};
+        {square: round(calculator.getSquare(sides)), figure: calculator.getFigure(sides), input: sides} :
+        {square: undefined, figure: 'Undefined figure', input: sides};
 }
 
 console.log(calculateArea(2));    // {square: 4, figure: 'square'}
