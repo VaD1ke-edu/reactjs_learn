@@ -1,3 +1,4 @@
 .idea
 .DS_Store
 2_webpack/node_modules
+2_webpack/dist
