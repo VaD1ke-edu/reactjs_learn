@@ -1,12 +1,28 @@
+@import (reference) './vars';
+
 .form {
   width: 20rem;
-  padding: 3rem;
+  padding: 1rem 3rem;
   margin: 0 auto;
-  box-shadow: 0 0 3px 1px #333;
+
+  box-shadow: 0 0 3px 1px @box-shadow-color;
+  background-color: @form-background-color;
+
+  &__title {
+    color: @title-color;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
 
   &__row {
     justify-content: space-around;
     margin-bottom: 1rem;
+
+    &_btn {
+      display: flex;
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
   }
 
   &__label,
@@ -16,6 +32,14 @@
   }
 
   &__btn {
+    justify-content: center;
+    padding: .5rem;
+    min-width: 10rem;
+
+    background-color: @btn-background-color;
+    border-width: 0;
+    box-shadow: 0 0 1px 1px #333;
     cursor: pointer;
+    text-transform: uppercase;
   }
 }
