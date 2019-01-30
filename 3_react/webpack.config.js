@@ -18,22 +18,16 @@ module.exports = {
         rules :[
             {
                 test: /\.less$/,
-                use: [
-                    {loader: 'style-loader'},
-                    {loader: 'css-loader'},
-                    {loader: 'less-loader'}
-                ]
+                use: ['style-loader', 'css-loader', 'less-loader']
             },
             {
                 test: /\.css$/,
-                loader: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
                 test:/\.(jsx|js)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                }
+                use: 'babel-loader'
             },
         ]
     }
