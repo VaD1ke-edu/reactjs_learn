@@ -3,7 +3,7 @@ import React from 'react';
 class Home extends React.Component {
     render() {
         return (<div>
-            Home page
+            <h1 className="title">React 5 д/з</h1>
         </div>);
     }
 }

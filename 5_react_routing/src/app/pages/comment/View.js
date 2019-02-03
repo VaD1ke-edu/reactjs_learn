@@ -1,9 +1,9 @@
 import React from 'react';
 
-class About extends React.Component {
+class View extends React.Component {
     render() {
         return (<div>
-            <h1 className="title">О нас</h1>
+            <h1 className="title">Коммент</h1>
             <div className="description">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
                 standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -15,4 +15,4 @@ class About extends React.Component {
     }
 }
 
-export default About;
+export default View;
