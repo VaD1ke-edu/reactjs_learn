@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class ListItem extends Component {
+class ListItem extends React.Component {
     render() {
         return (<li key={this.props.index} className="list__item">
             <a href={this.props.link} className="list__link">{this.props.name}</a>
