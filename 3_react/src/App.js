@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
 import DeveloperList from './components/developer/list';
 import DeveloperForm from './components/developer/form';
 
 import './style/common.less';
 
-class App extends Component {
+class App extends React.Component {
     render() {
         const developers = [
             {name: 'Vlad', link: '/info?user=Vlad'},

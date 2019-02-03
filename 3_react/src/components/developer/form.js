@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import React from 'react';
 import '../../style/form.less';
 
-class Form extends Component {
+class Form extends React.Component {
     render() {
         const managerOptions = this.props.managers.map((manager, index) => {
             return <option key={index} value={manager.name}>{manager.name}</option>;
