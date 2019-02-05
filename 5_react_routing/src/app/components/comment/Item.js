@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 class Item extends React.Component {
     render() {
-        return (<div key={this.props.index} className="list__item">
-            <a href={this.props.link} className="list__link list__title">{this.props.name}</a>
-            <div className="list__info">{this.props.email}</div>
+        return (<div key={this.props.index} className="list-item">
+            <a href={this.props.link} className="list-item__link list-item__title">{this.props.name}</a>
+            <div className="list-item__info">{this.props.email}</div>
         </div>);
     }
 }
