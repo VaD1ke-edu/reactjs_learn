@@ -1,5 +1,6 @@
 //подключаем модули
 const path = require('path');
+const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -8,7 +9,8 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
 
     mode: 'development',
@@ -30,5 +32,12 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         historyApiFallback: true
-    }
+    },
+
+    plugins: [
+        new HtmlPlugin({
+            template: path.resolve(__dirname, 'src', 'index.html'),
+            filename: 'index.html'
+        })
+    ]
 };
