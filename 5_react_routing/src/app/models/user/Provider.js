@@ -9,8 +9,8 @@ class Provider {
     }
 
     static getItem(id) {
-        return new Promise((resolve,) => {
-            resolve(Provider.getList()[id] || {});
+        return Provider.getList().then((data) => {
+            return data.find(user => +user.id === +id) || {};
         });
     }
 }

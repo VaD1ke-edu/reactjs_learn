@@ -1,17 +1,38 @@
 import React from 'react';
 
+import CommentProvider from '../../models/comment/Provider';
+import CommentItem from '../../components/comment/Item';
+
 class List extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            comments: []
+        };
+
+        if (!this.props.children) {
+            const comments = this.props.postId ? CommentProvider.getListByPost(this.props.postId) : CommentProvider.getList();
+            comments.then((data) => {
+                this.setState({comments: data});
+            });
+        }
+    }
+
+
     render() {
-        return (<div>
-            <h1 className="title">Комментарии</h1>
-            <div className="description">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-            </div>
-        </div>);
+        const comments = this.state.comments.map((item, index) => {
+            const id = item.id || index;
+            const link = '/comments/' + id;
+            return <CommentItem {...item} link={link} key={id} />;
+        });
+
+        return this.props.children ?
+            (<div>{this.props.children}</div>) :
+            (<div>
+                <h1 className="title">Комментарии</h1>
+                <div className="list">{comments}</div>
+            </div>);
     }
 }
 

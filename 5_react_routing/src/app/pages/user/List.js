@@ -11,24 +11,30 @@ class List extends React.Component {
             users: []
         };
 
-        UserProvider.getList().then((data) => {
-            this.setState({users: data});
-        })
+
+        if (!this.props.children) {
+            UserProvider.getList().then((data) => {
+                this.setState({users: data});
+            });
+        }
     }
 
 
     render() {
         const users = this.state.users.map((item, index) => {
-            const link = '/user/' + index;
-            return <UserItem {...item} index={index} link={link}/>;
+            const id = item.id || index;
+            const link = '/users/' + id;
+            return <UserItem {...item} link={link} key={id} />;
         });
 
-        return (<div>
-            <h1 className="title">Пользователи</h1>
-            <div className="list">
-                {users}
-            </div>
-        </div>);
+        return this.props.children ?
+            (<div>{this.props.children}</div>) :
+            (<div>
+                <h1 className="title">Пользователи</h1>
+                <div className="list">
+                    {users}
+                </div>
+            </div>);
     }
 }
 

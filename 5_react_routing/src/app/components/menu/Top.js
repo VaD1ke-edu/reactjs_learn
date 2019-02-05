@@ -10,7 +10,6 @@ class Top extends React.Component {
             <Link className="topmenu__item" to="/">Главная</Link>
             <Link className="topmenu__item" to="/posts">Посты</Link>
             <Link className="topmenu__item" to="/comments">Комментарии</Link>
-            <Link className="topmenu__item" to="/comments/1">Комментарии 1</Link>
             <Link className="topmenu__item" to="/users">Пользователи</Link>
             <Link className="topmenu__item" to="/about">О нас</Link>
         </div>);
