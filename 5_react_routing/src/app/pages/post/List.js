@@ -28,6 +28,10 @@ class List extends React.Component {
         this.setState({posts: PostStore.getPosts()});
     }
 
+    newPost() {
+        addPost('custom post', 1, 'custom post description')
+    }
+
     render() {
         const posts = this.state.posts.map((item, index) => {
             const id = item.id || index;
@@ -39,6 +43,7 @@ class List extends React.Component {
             (<div>{this.props.children}</div>) :
             (<div>
                 <h1 className="title">Посты</h1>
+                <button onClick={this.newPost}>Добавить пост</button>
                 <div className="list">
                     {posts}
                 </div>

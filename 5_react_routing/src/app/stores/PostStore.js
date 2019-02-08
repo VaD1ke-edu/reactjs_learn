@@ -33,7 +33,7 @@ class PostStore extends EventEmitter {
     }
 
     addPost(post) {
-        this._posts.push(post);
+        this._posts.unshift(post);
         this.emitListChange();
     }
 

@@ -28,6 +28,10 @@ class List extends React.Component {
         this.setState({comments: CommentStore.getComments()});
     }
 
+    newComment() {
+        addComment('custom comment', 'qwe@qweqwe.com')
+    }
+
     render() {
         const comments = this.state.comments.map((item, index) => {
             const id = item.id || index;
@@ -39,6 +43,7 @@ class List extends React.Component {
             (<div>{this.props.children}</div>) :
             (<div>
                 <h1 className="title">Комментарии</h1>
+                <button onClick={this.newComment}>Добавить комментарий</button>
                 <div className="list">{comments}</div>
             </div>);
     }

@@ -27,6 +27,10 @@ class List extends React.Component {
     onUserChange() {
         this.setState({users: UserStore.getUsers()});
     }
+
+    newUser() {
+        addUser('qwe', 'qwe@qweqwe.com')
+    }
     
     render() {
         const users = this.state.users.map((item, index) => {
@@ -39,6 +43,7 @@ class List extends React.Component {
             (<div>{this.props.children}</div>) :
             (<div>
                 <h1 className="title">Пользователи</h1>
+                <button onClick={this.newUser}>Добавить пользователя</button>
                 <div className="list">
                     {users}
                 </div>

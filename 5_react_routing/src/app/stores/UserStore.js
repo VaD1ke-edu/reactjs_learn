@@ -28,7 +28,6 @@ class UserStore extends EventEmitter {
     }
 
     setUsers(users) {
-        console.log('set users', users);
         this._users = users;
         this.emitListChange();
     }

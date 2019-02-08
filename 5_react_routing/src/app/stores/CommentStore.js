@@ -33,7 +33,7 @@ class CommentStore extends EventEmitter {
     }
 
     addComment(comment) {
-        this._comments.push(comment);
+        this._comments.unshift(comment);
         this.emitListChange();
     }
 
