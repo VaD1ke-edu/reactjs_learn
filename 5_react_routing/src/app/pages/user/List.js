@@ -1,7 +1,10 @@
 import React from 'react';
 
-import UserProvider from '../../models/user/Provider';
+import UserStore from '../../stores/UserStore';
 import UserItem from '../../components/user/Item';
+
+import {addUser, getUsers} from '../../actions/UserActions';
+import {UPDATE_USERS_EVENT} from '../../constants/userConstants';
 
 class List extends React.Component {
     constructor(props) {
@@ -11,15 +14,20 @@ class List extends React.Component {
             users: []
         };
 
-
+        this.onUserChange = this.onUserChange.bind(this);
+    }
+    
+    componentDidMount() {
         if (!this.props.children) {
-            UserProvider.getList().then((data) => {
-                this.setState({users: data});
-            });
+            UserStore.on(UPDATE_USERS_EVENT, this.onUserChange);
+            getUsers();
         }
     }
 
-
+    onUserChange() {
+        this.setState({users: UserStore.getUsers()});
+    }
+    
     render() {
         const users = this.state.users.map((item, index) => {
             const id = item.id || index;

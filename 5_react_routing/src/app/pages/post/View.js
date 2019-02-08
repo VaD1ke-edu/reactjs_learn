@@ -1,7 +1,9 @@
 import React from 'react';
 import CommentList from "../comment/List";
-import PostProvider from "../../models/post/Provider";
 
+import PostStore from '../../stores/PostStore';
+import {getPostById} from "../../actions/PostActions";
+import {CURRENT_POST_EVENT} from "../../constants/postConstants";
 
 class View extends React.Component {
     constructor(props) {
@@ -10,10 +12,16 @@ class View extends React.Component {
         this.state = {
             post: {}
         };
+        this.onPostChange = this.onPostChange.bind(this);
+    }
 
-        PostProvider.getItem(this.props.params.id).then((data) => {
-            this.setState({post: data});
-        })
+    componentDidMount() {
+        getPostById(this.props.params.id);
+        PostStore.on(CURRENT_POST_EVENT, this.onPostChange);
+    }
+
+    onPostChange() {
+        this.setState({post: PostStore.getCurrentPost()});
     }
 
     render() {

@@ -1,7 +1,10 @@
 import React from 'react';
 
-import UserProvider from '../../models/user/Provider';
 import PostList from "../post/List";
+import UserStore from '../../stores/UserStore';
+import {getUserById} from '../../actions/UserActions';
+import {CURRENT_USER_EVENT} from '../../constants/userConstants';
+
 
 class View extends React.Component {
     constructor(props) {
@@ -11,11 +14,16 @@ class View extends React.Component {
             user: {}
         };
 
-        if (!this.props.children) {
-            UserProvider.getItem(this.props.params.id).then((data) => {
-                this.setState({user: data});
-            });
-        }
+        this.onUserChange = this.onUserChange.bind(this);
+    }
+
+    componentDidMount() {
+        UserStore.on(CURRENT_USER_EVENT, this.onUserChange);
+        getUserById(this.props.params.id);
+    }
+
+    onUserChange() {
+        this.setState({user: UserStore.getCurrentUser()});
     }
 
     render() {

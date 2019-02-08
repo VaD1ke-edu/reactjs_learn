@@ -39,5 +39,16 @@ module.exports = {
             template: path.resolve(__dirname, 'src', 'index.html'),
             filename: 'index.html'
         })
-    ]
+    ],
+
+    resolve: {
+        alias: {
+            App: path.resolve(__dirname, 'src/app/'),
+            Pages: path.resolve(__dirname, 'src/app/pages/'),
+            Actions: path.resolve(__dirname, 'src/app/actions/'),
+            Components: path.resolve(__dirname, 'src/app/components/'),
+            Constants: path.resolve(__dirname, 'src/app/constants/'),
+            Layouts: path.resolve(__dirname, 'src/app/layouts/')
+        }
+    }
 };

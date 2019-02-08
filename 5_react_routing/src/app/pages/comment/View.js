@@ -1,6 +1,8 @@
 import React from 'react';
-import CommentProvider from "../../models/comment/Provider";
 
+import CommentStore from '../../stores/CommentStore';
+import {getCommentById} from '../../actions/CommentActions';
+import {CURRENT_COMMENT_EVENT} from '../../constants/commentConstants';
 
 class View extends React.Component {
     constructor(props) {
@@ -10,9 +12,16 @@ class View extends React.Component {
             comment: {}
         };
 
-        CommentProvider.getItem(this.props.params.id).then((data) => {
-            this.setState({comment: data});
-        })
+        this.onCommentChange = this.onCommentChange.bind(this);
+    }
+
+    componentDidMount() {
+        getCommentById(this.props.params.id);
+        CommentStore.on(CURRENT_COMMENT_EVENT, this.onCommentChange);
+    }
+
+    onCommentChange() {
+        this.setState({comment: CommentStore.getCurrentComment()});
     }
 
     render() {
