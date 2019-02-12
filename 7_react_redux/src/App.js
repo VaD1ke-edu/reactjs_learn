@@ -1,3 +1,5 @@
+
+import './app/styles/common.less';
 import React from 'react';
 import ReactDom from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
@@ -14,6 +16,11 @@ import PostViewPage from './app/pages/post/View';
 import NoRoute from './app/pages/NoRoute';
 
 import './app/styles/common.less';
+
+import {combineReducers, createStore} from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware';
 
 
 ReactDom.render(
