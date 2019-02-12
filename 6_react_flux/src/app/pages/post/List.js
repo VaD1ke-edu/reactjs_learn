@@ -1,7 +1,10 @@
 import React from 'react';
 
-import PostProvider from '../../models/post/Provider';
+import PostStore from '../../stores/PostStore';
 import PostItem from '../../components/post/Item';
+
+import {addPost, getPosts, getPostsByUser} from "../../actions/PostActions";
+import {UPDATE_POSTS_EVENT} from "../../constants/postConstants";
 
 class List extends React.Component {
     constructor(props) {
@@ -11,14 +14,23 @@ class List extends React.Component {
             posts: []
         };
 
+        this.onPostChange = this.onPostChange.bind(this);
+    }
+
+    componentDidMount() {
         if (!this.props.children) {
-            const posts = this.props.userId ? PostProvider.getListByUser(this.props.userId) : PostProvider.getList();
-            posts.then((data) => {
-                this.setState({posts: data});
-            });
+            PostStore.on(UPDATE_POSTS_EVENT, this.onPostChange);
+            this.props.userId ? getPostsByUser(this.props.userId) : getPosts();
         }
     }
 
+    onPostChange() {
+        this.setState({posts: PostStore.getPosts()});
+    }
+
+    newPost() {
+        addPost('custom post', 1, 'custom post description')
+    }
 
     render() {
         const posts = this.state.posts.map((item, index) => {
@@ -31,6 +43,7 @@ class List extends React.Component {
             (<div>{this.props.children}</div>) :
             (<div>
                 <h1 className="title">Посты</h1>
+                <button onClick={this.newPost}>Добавить пост</button>
                 <div className="list">
                     {posts}
                 </div>

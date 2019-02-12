@@ -7,7 +7,7 @@ class Item extends React.Component {
         const emailLink = 'mailto:' + this.props.email;
         return (<div key={this.props.id || this.props.index} className="list-item">
             <Link to={this.props.link} className="list-item__link list-item__title">{this.props.name}</Link>
-            <a href={emailLink} className="list-item__desc">{this.props.email}</a>
+            <a href={emailLink} className="list-item__description">{this.props.email}</a>
         </div>);
     }
 }

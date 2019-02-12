@@ -1,7 +1,10 @@
 import React from 'react';
 
-import CommentProvider from '../../models/comment/Provider';
+import CommentStore from '../../stores/CommentStore';
 import CommentItem from '../../components/comment/Item';
+
+import {addComment, getComments, getCommentsByPost} from '../../actions/CommentActions';
+import {UPDATE_COMMENTS_EVENT} from '../../constants/commentConstants';
 
 class List extends React.Component {
     constructor(props) {
@@ -11,14 +14,23 @@ class List extends React.Component {
             comments: []
         };
 
+        this.onCommentChange = this.onCommentChange.bind(this);
+    }
+
+    componentDidMount() {
         if (!this.props.children) {
-            const comments = this.props.postId ? CommentProvider.getListByPost(this.props.postId) : CommentProvider.getList();
-            comments.then((data) => {
-                this.setState({comments: data});
-            });
+            CommentStore.on(UPDATE_COMMENTS_EVENT, this.onCommentChange);
+            this.props.postId ? getCommentsByPost(this.props.postId) : getComments();
         }
     }
 
+    onCommentChange() {
+        this.setState({comments: CommentStore.getComments()});
+    }
+
+    newComment() {
+        addComment('custom comment', 'qwe@qweqwe.com')
+    }
 
     render() {
         const comments = this.state.comments.map((item, index) => {
@@ -31,6 +43,7 @@ class List extends React.Component {
             (<div>{this.props.children}</div>) :
             (<div>
                 <h1 className="title">Комментарии</h1>
+                <button onClick={this.newComment}>Добавить комментарий</button>
                 <div className="list">{comments}</div>
             </div>);
     }

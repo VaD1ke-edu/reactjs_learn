@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
-import DefaultLayout from './app/layouts/Default';
-import HomePage from './app/pages/Home';
-import AboutPage from './app/pages/About';
-import CommentListPage from './app/pages/comment/List';
-import CommentViewPage from './app/pages/comment/View';
-import UserListPage from './app/pages/user/List';
-import UserViewPage from './app/pages/user/View';
-import PostListPage from './app/pages/post/List';
-import PostViewPage from './app/pages/post/View';
-import NoRoute from './app/pages/NoRoute';
+import DefaultLayout from 'Layouts/Default';
+import HomePage from 'Pages/Home';
+import AboutPage from 'Pages/About';
+import CommentListPage from 'Pages/comment/List';
+import CommentViewPage from 'Pages/comment/View';
+import UserListPage from 'Pages/user/List';
+import UserViewPage from 'Pages/user/View';
+import PostListPage from 'Pages/post/List';
+import PostViewPage from 'Pages/post/View';
+import NoRoute from 'Pages/NoRoute';
 
 import './app/styles/common.less';
 
