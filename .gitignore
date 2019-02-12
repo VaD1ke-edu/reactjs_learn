@@ -8,5 +8,7 @@
 4_react/dist
 5_react_routing/node_modules
 5_react_routing/dist
+6_react_flux/node_modules
+6_react_flux/dist
 7_react_redux/node_modules
 7_react_redux/dist
