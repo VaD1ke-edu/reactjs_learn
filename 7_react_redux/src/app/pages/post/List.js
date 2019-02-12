@@ -1,41 +1,55 @@
 import React from 'react';
 
-import PostProvider from '../../models/post/Provider';
 import PostItem from '../../components/post/Item';
+
+import {addPost, getPosts, getPostsByUser} from "../../actions/PostActions";
+
+import {connect} from 'react-redux';
 
 class List extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            posts: []
-        };
+        this.newPost = this.newPost.bind(this);
+    }
 
+    componentDidMount() {
         if (!this.props.children) {
-            const posts = this.props.userId ? PostProvider.getListByUser(this.props.userId) : PostProvider.getList();
-            posts.then((data) => {
-                this.setState({posts: data});
-            });
+            this.props.dispatch(this.props.userId ? getPostsByUser(this.props.userId) : getPosts());
         }
+    }
+
+    newPost() {
+        this.props.dispatch(addPost('custom post', 1, 'custom post description'));
     }
 
 
     render() {
-        const posts = this.state.posts.map((item, index) => {
+        const {children, posts} = this.props;
+        const postItems = this.props.posts.map((item, index) => {
             const id = item.id || index;
             const link = '/posts/' + id;
             return <PostItem title={item.title} text={item.body} link={link} key={id} />;
         });
 
-        return this.props.children ?
-            (<div>{this.props.children}</div>) :
+        return children ?
+            (<div>{children}</div>) :
             (<div>
                 <h1 className="title">Посты</h1>
+                <button onClick={this.newPost}>Добавить пост</button>
                 <div className="list">
-                    {posts}
+                    {postItems}
                 </div>
             </div>);
     }
 }
 
-export default List;
+function mapStateToProps(state) {
+    return {
+        posts: state.posts.data,
+        postsFetched: state.posts.fetched
+    };
+}
+
+
+export default connect(mapStateToProps)(List);

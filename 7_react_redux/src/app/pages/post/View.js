@@ -1,30 +1,28 @@
 import React from 'react';
-import CommentList from "../comment/List";
-import PostProvider from "../../models/post/Provider";
-
+import CommentList from '../comment/List';
+import {getPostById} from "../../actions/PostActions";
+import {connect} from 'react-redux';
 
 class View extends React.Component {
     constructor(props) {
         super(props);
+    }
 
-        this.state = {
-            post: {}
-        };
-
-        PostProvider.getItem(this.props.params.id).then((data) => {
-            this.setState({post: data});
-        })
+    componentDidMount() {
+        this.props.dispatch(getPostById(this.props.params.id));
     }
 
     render() {
-        const commentsSection = this.state.post.id ? ( <div className="section">
-                <CommentList postId={this.state.post.id}/>
+        console.log(this.props);
+        const {currentPost} = this.props;
+        const commentsSection = currentPost.id ? ( <div className="section">
+                <CommentList postId={currentPost.id}/>
             </div>) : '';
         return (<div>
             <div className="section">
-                <h1 className="title">{this.state.post.title}</h1>
+                <h1 className="title">{currentPost.title}</h1>
                 <div className="description">
-                    {this.state.post.body}
+                    {currentPost.body}
                 </div>
             </div>
             {commentsSection}
@@ -32,4 +30,10 @@ class View extends React.Component {
     }
 }
 
-export default View;
+function mapStateToProps(state) {
+    return {
+        currentPost: state.currentPost.data
+    };
+}
+
+export default connect(mapStateToProps)(View);

@@ -3,6 +3,8 @@ import './app/styles/common.less';
 import React from 'react';
 import ReactDom from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Provider} from 'react-redux';
+import store from './app/store';
 
 import DefaultLayout from './app/layouts/Default';
 import HomePage from './app/pages/Home';
@@ -17,28 +19,25 @@ import NoRoute from './app/pages/NoRoute';
 
 import './app/styles/common.less';
 
-import {combineReducers, createStore} from 'redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
-
 
 ReactDom.render(
-    <Router history={browserHistory}>
-        <Route path="/" component={DefaultLayout}>
-            <IndexRoute component={HomePage}/>
-            <Route path="about" component={AboutPage}/>
-            <Route path="posts" component={PostListPage}>
-                <Route path=":id" component={PostViewPage}/>
+    <Provider store={store}>
+        <Router history={browserHistory}>
+            <Route path="/" component={DefaultLayout}>
+                <IndexRoute component={HomePage}/>
+                <Route path="about" component={AboutPage}/>
+                <Route path="posts" component={PostListPage}>
+                    <Route path=":id" component={PostViewPage}/>
+                </Route>
+                <Route path="comments" component={CommentListPage}>
+                    <Route path=":id" component={CommentViewPage}/>
+                </Route>
+                <Route path="users" component={UserListPage}>
+                    <Route path=":id" component={UserViewPage}/>
+                </Route>
+                <Route path="*" component={NoRoute}/>
             </Route>
-            <Route path="comments" component={CommentListPage}>
-                <Route path=":id" component={CommentViewPage}/>
-            </Route>
-            <Route path="users" component={UserListPage}>
-                <Route path=":id" component={UserViewPage}/>
-            </Route>
-            <Route path="*" component={NoRoute}/>
-        </Route>
-    </Router>,
+        </Router>
+    </Provider>,
     document.querySelector('#root')
 );
