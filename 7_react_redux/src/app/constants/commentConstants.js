@@ -1,3 +1,7 @@
-export const ADD_COMMENT_EVENT     = 'add-comment';
-export const UPDATE_COMMENTS_EVENT = 'update-comments';
-export const CURRENT_COMMENT_EVENT = 'update-current-comment';
+export const ADD_COMMENT                     = 'ADD_COMMENT';
+export const FETCH_COMMENTS                  = 'FETCH_COMMENTS';
+export const FETCH_COMMENTS_FULFILLED        = 'FETCH_COMMENTS_FULFILLED';
+export const FETCH_COMMENTS_REJECTED         = 'FETCH_COMMENTS_REJECTED';
+export const FETCH_CURRENT_COMMENT           = 'FETCH_COMMENT';
+export const FETCH_CURRENT_COMMENT_FULFILLED = 'FETCH_COMMENT_FULFILLED';
+export const FETCH_CURRENT_COMMENT_REJECTED  = 'FETCH_COMMENT_REJECTED';

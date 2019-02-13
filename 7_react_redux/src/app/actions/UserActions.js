@@ -1,5 +1,8 @@
-import dispatcher from '../Dispatcher';
-import {ADD_USER_EVENT, UPDATE_USERS_EVENT, CURRENT_USER_EVENT} from "../constants/userConstants";
+import {
+    ADD_USER,
+    FETCH_USERS, FETCH_USERS_REJECTED, FETCH_USERS_FULFILLED,
+    FETCH_CURRENT_USER, FETCH_CURRENT_USER_FULFILLED, FETCH_CURRENT_USER_REJECTED
+} from '../constants/userConstants';
 
 function getData() {
     return [
@@ -9,23 +12,23 @@ function getData() {
 }
 
 export function getUsers() {
-    dispatcher.dispatch({
-        type: UPDATE_USERS_EVENT,
-        data: getData()
-    });
+    return {
+        type: FETCH_USERS_FULFILLED,
+        payload: getData()
+    };
 }
 
 export function getUserById(id) {
     const user = getData().find(user => +user.id === +id) || {};
-    dispatcher.dispatch({
-        type: CURRENT_USER_EVENT,
-        data: user
-    });
+    return {
+        type: FETCH_CURRENT_USER_FULFILLED,
+        payload: user
+    };
 }
 
 export function addUser(name, email) {
-    dispatcher.dispatch({
-        type: ADD_USER_EVENT,
-        data: {name, email}
-    });
+    return {
+        type: ADD_USER,
+        payload: {name, email}
+    };
 }

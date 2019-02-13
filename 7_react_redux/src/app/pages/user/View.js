@@ -1,36 +1,32 @@
 import React from 'react';
 
-import UserProvider from '../../models/user/Provider';
 import PostList from "../post/List";
+import {connect} from "react-redux";
+import {getUserById} from "../../actions/UserActions";
 
 class View extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            user: {}
-        };
-
-        if (!this.props.children) {
-            UserProvider.getItem(this.props.params.id).then((data) => {
-                this.setState({user: data});
-            });
-        }
+    componentDidMount() {
+        this.props.dispatch(getUserById(this.props.params.id));
     }
 
     render() {
-        const postSection = this.state.user.id ? ( <div className="section">
-            <PostList userId={this.state.user.id}/>
-        </div>) : '';
+        const user = this.props.currentUser;
+        const postSection = user.id ? ( <div className="section"><PostList userId={user.id}/></div>) : '';
 
         return (<div>
             <div className="section">
-                <h1 className="title">{this.state.user.name}</h1>
-                <div>{this.state.user.email}</div>
+                <h1 className="title">{user.name}</h1>
+                <div>{user.email}</div>
             </div>
             {postSection}
         </div>);
     }
 }
 
-export default View;
+function mapStateToProps(state) {
+    return {
+        currentUser: state.currentUser.data
+    };
+}
+
+export default connect(mapStateToProps)(View);

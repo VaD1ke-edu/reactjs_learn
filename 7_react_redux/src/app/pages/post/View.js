@@ -4,20 +4,13 @@ import {getPostById} from "../../actions/PostActions";
 import {connect} from 'react-redux';
 
 class View extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.dispatch(getPostById(this.props.params.id));
     }
 
     render() {
-        console.log(this.props);
         const {currentPost} = this.props;
-        const commentsSection = currentPost.id ? ( <div className="section">
-                <CommentList postId={currentPost.id}/>
-            </div>) : '';
+        const commentsSection = currentPost.id ? ( <div className="section"><CommentList postId={currentPost.id}/></div>) : '';
         return (<div>
             <div className="section">
                 <h1 className="title">{currentPost.title}</h1>

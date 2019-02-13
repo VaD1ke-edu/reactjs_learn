@@ -10,7 +10,7 @@ const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 export function getPosts() {
     return function(dispatch) {
-        dispatch({type: 'FETCH_POSTS'});
+        dispatch({type: FETCH_POSTS});
         axios
             .get(API_URL)
             .then(response => {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import PostItem from '../../components/post/Item';
 
-import {addPost, getPosts, getPostsByUser} from "../../actions/PostActions";
+import {addPost, getPosts, getPostsByUser} from '../../actions/PostActions';
 
 import {connect} from 'react-redux';
 
@@ -23,10 +23,9 @@ class List extends React.Component {
         this.props.dispatch(addPost('custom post', 1, 'custom post description'));
     }
 
-
     render() {
         const {children, posts} = this.props;
-        const postItems = this.props.posts.map((item, index) => {
+        const postItems = posts.map((item, index) => {
             const id = item.id || index;
             const link = '/posts/' + id;
             return <PostItem title={item.title} text={item.body} link={link} key={id} />;

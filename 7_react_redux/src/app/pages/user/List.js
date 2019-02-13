@@ -1,41 +1,56 @@
 import React from 'react';
 
-import UserProvider from '../../models/user/Provider';
 import UserItem from '../../components/user/Item';
+
+import {addUser, getUsers} from '../../actions/UserActions';
+import {connect} from 'react-redux';
 
 class List extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            users: []
-        };
+        this.newUser = this.newUser.bind(this);
+    }
 
 
+    componentDidMount() {
         if (!this.props.children) {
-            UserProvider.getList().then((data) => {
-                this.setState({users: data});
-            });
+            this.props.dispatch(getUsers());
         }
+    }
+
+    newUser() {
+        this.props.dispatch(addUser('user', 'qwe@qwe.com'));
     }
 
 
     render() {
-        const users = this.state.users.map((item, index) => {
+        const {children, users} = this.props;
+        const userItems = users.map((item, index) => {
             const id = item.id || index;
             const link = '/users/' + id;
             return <UserItem {...item} link={link} key={id} />;
         });
 
-        return this.props.children ?
-            (<div>{this.props.children}</div>) :
+        return children ?
+            (<div>{children}</div>) :
             (<div>
                 <h1 className="title">Пользователи</h1>
+                <button onClick={this.newUser}>Добавить пользователя</button>
                 <div className="list">
-                    {users}
+                    {userItems}
                 </div>
             </div>);
     }
 }
 
-export default List;
+
+function mapStateToProps(state) {
+    return {
+        users: state.users.data,
+        usersFetched: state.users.fetched
+    };
+}
+
+
+export default connect(mapStateToProps)(List);

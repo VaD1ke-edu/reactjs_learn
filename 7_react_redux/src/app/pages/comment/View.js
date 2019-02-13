@@ -1,28 +1,28 @@
 import React from 'react';
-import CommentProvider from "../../models/comment/Provider";
+import {getCommentById} from "../../actions/CommentActions";
+import {connect} from 'react-redux';
 
 
 class View extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            comment: {}
-        };
-
-        CommentProvider.getItem(this.props.params.id).then((data) => {
-            this.setState({comment: data});
-        })
+    componentDidMount() {
+        this.props.dispatch(getCommentById(this.props.params.id));
     }
 
     render() {
+        const comment = this.props.currentComment;
         return (<div>
-            <h1 className="title">{this.state.comment.name}</h1>
+            <h1 className="title">{comment.name}</h1>
             <div className="description">
-                {this.state.comment.email}
+                {comment.email}
             </div>
         </div>);
     }
 }
 
-export default View;
+function mapStateToProps(state) {
+    return {
+        currentComment: state.currentComment.data
+    };
+}
+
+export default connect(mapStateToProps)(View);
