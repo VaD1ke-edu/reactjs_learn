@@ -4,7 +4,7 @@ import {EventEmitter} from 'events';
 
 class PostStore extends EventEmitter {
     constructor() {
-        super(...arguments);
+        super();
         this._posts = [];
         this._currentPost = null;
 
@@ -33,7 +33,7 @@ class PostStore extends EventEmitter {
     }
 
     addPost(post) {
-        this._posts.unshift(post);
+        this._posts = [post, ...this._posts];
         this.emitListChange();
     }
 

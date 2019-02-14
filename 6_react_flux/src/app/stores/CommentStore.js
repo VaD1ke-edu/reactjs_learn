@@ -4,7 +4,7 @@ import {EventEmitter} from 'events';
 
 class CommentStore extends EventEmitter {
     constructor() {
-        super(...arguments);
+        super();
         this._comments = [];
         this._currentComment = null;
 
@@ -33,7 +33,7 @@ class CommentStore extends EventEmitter {
     }
 
     addComment(comment) {
-        this._comments.unshift(comment);
+        this._comments = [comment, ...this._comments];
         this.emitListChange();
     }
 

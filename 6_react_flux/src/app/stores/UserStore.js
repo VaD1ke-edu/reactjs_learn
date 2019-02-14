@@ -4,7 +4,7 @@ import {EventEmitter} from 'events';
 
 class UserStore extends EventEmitter {
     constructor() {
-        super(...arguments);
+        super();
         this._users = [];
         this._currentUser = null;
 
@@ -33,7 +33,7 @@ class UserStore extends EventEmitter {
     }
 
     addUser(user) {
-        this._users.push(user);
+        this._users = [...this._users, user];
         this.emitListChange();
     }
 
