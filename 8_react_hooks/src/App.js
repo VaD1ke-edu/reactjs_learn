@@ -1,8 +1,6 @@
-
 import './app/styles/common.less';
 import React, {useState} from 'react';
 import ReactDom from 'react-dom';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 import HomePage from './app/pages/Home';
 import PostListPage from './app/pages/post/List';
