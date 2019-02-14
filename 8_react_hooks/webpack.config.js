@@ -1,4 +1,3 @@
-//подключаем модули
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 

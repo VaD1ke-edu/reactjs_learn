@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Item extends React.Component {
-    render() {
-        return (<div key={this.props.index} className="list-item">
-            <a href={this.props.link} className="list-item__link list-item__title">{this.props.title}</a>
-            <div className="list-item__description">{this.props.text}</div>
-        </div>);
-    }
-}
+const Item = props => {
+    return (<div key={props.index} className="list-item">
+        <a href={props.link} className="list-item__link list-item__title">{props.title}</a>
+        <div className="list-item__description">{props.text}</div>
+    </div>);
+};
 
 Item.defaultProps = {
     link: '#'
