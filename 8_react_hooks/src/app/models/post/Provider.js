@@ -1,20 +1,16 @@
 import axios from 'axios';
 
+const API_URL = 'https://react-learn-d72a2.firebaseio.com/posts.json';
+
 class Provider {
     static getList() {
-        return axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.data);
+        return axios.get(API_URL)
+            .then(response => Object.values(response.data));
     }
 
-    static getListByUser(userId) {
-        return Provider.getList().then((data) => {
-            return data.filter(item =>  +item.userId === +userId);
-        });
-    }
-
-    static getItem(id) {
-        return axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-            .then(response => response.data);
+    static addItem(item) {
+        return axios.post(API_URL, item)
+            .catch((msg) => console.log(msg));
     }
 }
 

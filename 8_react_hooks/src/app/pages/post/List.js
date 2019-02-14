@@ -8,6 +8,7 @@ const List = props => {
 
     useEffect(() => {
         PostProvider.getList().then((data) => {
+            console.log(data);
             setPosts(data);
         });
     }, []);
@@ -15,7 +16,7 @@ const List = props => {
     const addPost = () => {
         const maxId = Math.max.apply(Math, posts.map(o => o.id));
         const newPost = {id: maxId + 1, title: 'title', body: 'body'};
-        setPosts([newPost, ...posts]);
+        PostProvider.addItem(newPost).then(() => {setPosts([newPost, ...posts]);});
     };
 
     const postItems = posts.map((item, index) => {
