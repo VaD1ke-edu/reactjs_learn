@@ -1,0 +1,9 @@
+export const ADD_TODO              = 'ADD_TODO';
+export const DELETE_TODO           = 'DELETE_TODO';
+export const CHECK_TODO            = 'CHECK_TODO';
+export const SAVE_TODOS_PROCESS    = 'SAVE_TODOS_PROCESS';
+export const SAVE_TODOS_FULFILLED  = 'SAVE_TODOS_FULFILLED';
+export const SAVE_TODOS_REJECTED   = 'SAVE_TODOS_REJECTED';
+export const FETCH_TODOS_PROCESS   = 'FETCH_TODOS_PROCESS';
+export const FETCH_TODOS_FULFILLED = 'FETCH_TODOS_FULFILLED';
+export const FETCH_TODOS_REJECTED  = 'FETCH_TODOS_REJECTED';
