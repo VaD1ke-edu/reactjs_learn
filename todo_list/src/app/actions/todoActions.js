@@ -9,8 +9,6 @@ const API_URL = 'https://react-learn-d72a2.firebaseio.com/todos.json';
 
 
 export function saveTodos(data) {
-    // data = [{id: 1, name: 'qwe1'}, {id: 2, name: 'qwe2'}];
-    console.log(data);
     return function(dispatch) {
         dispatch({type: SAVE_TODOS_PROCESS});
         axios

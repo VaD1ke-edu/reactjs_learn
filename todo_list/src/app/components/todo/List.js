@@ -2,9 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 
 import Item from './Item';
-import {saveTodos, getTodos, addTodo, checkTodo, deleteTodo} from '../../actions/todoActions';
+import Form from './Form';
+import {saveTodos, getTodos, checkTodo, deleteTodo} from '../../actions/todoActions';
 
-class List extends React.Component {
+class List extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -31,20 +32,28 @@ class List extends React.Component {
     }
 
     render() {
-        const items = this.props.todos.map((item, index) => {
+        const {todos, saved, saving} = this.props;
+
+        const items = todos.map((item, index) => {
             return <Item data={item} key={index} onDelete={this.deleteTodo} onCheck={this.checkTodo} />
         });
 
+        let statusBar = saved ? 'saved' : (saving ? '...saving' : false);
+
         return (<>
+            <Form/>
             <div className="list">{items}</div>
             <button onClick={this.saveTodos}>save todos</button>
+            {statusBar ? <div>{statusBar}</div> : ''}
         </>);
     }
 }
 
 function mapStateToProps(state) {
     return {
-        todos: state.todos.data
+        todos: state.todos.visibleData,
+        saving: state.todos.saving,
+        saved: state.todos.saved
     };
 }
 

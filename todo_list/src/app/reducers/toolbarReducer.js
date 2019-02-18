@@ -1,22 +1,26 @@
 import {
-    ADD_TODO, FETCH_TODOS, FETCH_TODOS_REJECTED, FETCH_TODOS_FULFILLED
-} from '../constants/todoConstants';
+    CHECK_ALL, SHOW_CHECKED, SHOW_ALL, SHOW_NOT_CHECKED
+} from '../constants/toolbarConstants';
 
 const defaultToolbarState = {
-    allChecked: false,
-    allShowing: false
+    toolbar: {
+        allChecked: false,
+        allShowing: false,
+        checkedShowing: false,
+        notCheckedShowing: false
+    }
 };
 
-export function todosReducer(state = defaultTodosState, action) {
+export function toolbarReducer(state = defaultToolbarState, action) {
     switch (action.type) {
-        case FETCH_TODOS_PROCESS:
-            return {...state, fetching: true};
-        case FETCH_TODOS_REJECTED:
-            return {...state, fetching: false, error: action.payload};
-        case FETCH_TODOS_FULFILLED:
-            return {...state, fetching: false, fetched: true, data: action.payload};
-        case ADD_TODO:
-            return {...state , data: [...state.data, action.payload]};
+        case CHECK_ALL:
+            return {allChecked: !state.allChecked, allShowing: false, checkedShowing: false, notCheckedShowing: false};
+        case SHOW_ALL:
+            return {allChecked: false, allShowing: !state.allShowing, checkedShowing: false, notCheckedShowing: false};
+        case SHOW_CHECKED:
+            return {allChecked: false, allShowing: false, checkedShowing: !state.checkedShowing, notCheckedShowing: false};
+        case SHOW_NOT_CHECKED:
+            return {allChecked: false, allShowing: false, checkedShowing: false, notCheckedShowing: !state.notCheckedShowing};
     }
     return state;
 }
